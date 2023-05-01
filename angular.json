@@ -25,9 +25,13 @@
               "src/assets"
             ],
             "styles": [
+               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "./node_modules/jquery/dist/jquery.js",
+                "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -51,19 +55,39 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "day1-application:build"
+          },
           "configurations": {
             "production": {
               "browserTarget": "day1-application:build:production"
             },
             "development": {
               "browserTarget": "day1-application:build:development"
+            },
+            "staging": {
+              "browserTarget": "day1-application:build:staging"
             }
           },
           "defaultConfiguration": "development"
